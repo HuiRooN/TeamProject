@@ -23,7 +23,7 @@ public class ItemSpawn : MonoBehaviour
 		int randomX = Random.Range(0, 14);
 		int randomZ = Random.Range(0, 14);
 
-		while((5<=randomX && randomX<=8)&&(5<=randomZ && randomZ <=8))
+		while((4<=randomX && randomX<=9)&&(4<=randomZ && randomZ <=9))
 		{
 			randomX = Random.Range(0, 14);
 			randomZ = Random.Range(0, 14);

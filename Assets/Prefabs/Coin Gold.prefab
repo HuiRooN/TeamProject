@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3647947638461059558}
   - component: {fileID: 9093520189171581962}
-  m_Layer: 7
+  m_Layer: 8
   m_Name: Circle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94,7 +94,7 @@ GameObject:
   - component: {fileID: 4668551731456748979}
   - component: {fileID: 3317970529732468459}
   - component: {fileID: 1111732623189520520}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Mesh Object
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -174,9 +174,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1521325411071218691}
-  m_Layer: 0
+  - component: {fileID: 994143189887860193}
+  m_Layer: 8
   m_Name: Coin Gold
-  m_TagString: Untagged
+  m_TagString: Coin
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -197,3 +198,16 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &994143189887860193
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2186222510060375737}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.5, y: 1.5, z: 1.5}
+  m_Center: {x: 0, y: 0.67, z: 0}

@@ -79,4 +79,12 @@ public class Player : MonoBehaviour
         anim.SetBool("isRun", rDown);
 		//}
 	}
+
+	void OnCollisionEnter(Collision collision)
+	{
+		if(collision.gameObject.tag == "Coin")
+		{
+			Destroy(collision.gameObject);
+		}
+	}
 }
