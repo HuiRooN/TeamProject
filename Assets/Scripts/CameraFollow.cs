@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class CameraFollow : MonoBehaviour
 {
+    [SerializeField] MinimapCamera minimap_camera;
     [SerializeField] Transform target;
     [SerializeField] Transform cameraRig;
     [SerializeField] Vector3 offset;
@@ -65,6 +66,8 @@ public class CameraFollow : MonoBehaviour
         }
         else
             dist = 5f;
+
+        minimap_camera.MinimapCameraRotaiton(x);
 
     }
 
