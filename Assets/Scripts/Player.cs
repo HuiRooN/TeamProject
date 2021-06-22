@@ -10,6 +10,12 @@ public class Player : MonoBehaviour
 	float vAxis;
 	bool rDown;
 
+	public int health = 0;
+	public int maxHealth = 3;
+
+	public int coin;
+	public int maxCoin = 10;
+
 	Vector3 moveVec;
 
 	Animator anim;
@@ -19,6 +25,8 @@ public class Player : MonoBehaviour
 	void Awake()
     {
 		anim = GetComponent<Animator>();
+		health = maxHealth;
+		coin = 0;
     }
 
     // Update is called once per frame
@@ -85,6 +93,10 @@ public class Player : MonoBehaviour
 		if(collision.gameObject.tag == "Coin")
 		{
 			Destroy(collision.gameObject);
+			if (coin == maxCoin)
+				return;
+			else
+				coin += 1;
 		}
 	}
 }

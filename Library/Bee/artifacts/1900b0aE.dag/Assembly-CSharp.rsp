@@ -324,6 +324,7 @@
 "Assets/Scripts/ItemSpawn.cs"
 "Assets/Scripts/MinimapCamera.cs"
 "Assets/Scripts/Player.cs"
+"Assets/Scripts/UiManager.cs"
 -langversion:8.0
 
 /deterministic
