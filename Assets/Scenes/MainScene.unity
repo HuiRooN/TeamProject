@@ -332,6 +332,36 @@ Transform:
   m_Father: {fileID: 920505436}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &9633219
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 9633220}
+  m_Layer: 0
+  m_Name: attackArea
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &9633220
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9633219}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.19, y: 0.995, z: 1.457}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 341535477}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &14938262
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1051,6 +1081,7 @@ Transform:
   - {fileID: 1025161331}
   - {fileID: 112903891}
   - {fileID: 866240698}
+  - {fileID: 2059733776}
   m_Father: {fileID: 925469102}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1097,6 +1128,9 @@ MonoBehaviour:
   targetMask:
     serializedVersion: 2
     m_Bits: 8
+  attackArea: {fileID: 2059733776}
+  attackRadius: 2
+  attackDelay: 1
   EnemyWayPoint:
   - {fileID: 1339386915}
   - {fileID: 1221725976}
@@ -6645,6 +6679,7 @@ Transform:
   - {fileID: 797645435}
   - {fileID: 42435419}
   - {fileID: 978491514}
+  - {fileID: 9633220}
   m_Father: {fileID: 1870455651}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -6691,6 +6726,9 @@ MonoBehaviour:
   targetMask:
     serializedVersion: 2
     m_Bits: 8
+  attackArea: {fileID: 9633220}
+  attackRadius: 2
+  attackDelay: 1
   EnemyWayPoint:
   - {fileID: 512541235}
   - {fileID: 1778747000}
@@ -11000,9 +11038,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 555241305}
+  - component: {fileID: 555241306}
   m_Layer: 0
   m_Name: Axe
-  m_TagString: Untagged
+  m_TagString: Axe
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -11021,6 +11060,19 @@ Transform:
   m_Father: {fileID: 112903891}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &555241306
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 555241304}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 4.743715, y: 109.329765, z: 51.361378}
+  m_Center: {x: 1.8986024, y: 42.93773, z: 45.094017}
 --- !u!1001 &559065014
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -19735,6 +19787,36 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.1766212, y: 1.4444053, z: 1.9551525}
   m_Center: {x: 0.0000019073486, y: 0.72169673, z: 0.0000005066395}
+--- !u!1 &1017832604
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1017832605}
+  m_Layer: 0
+  m_Name: attackArea
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1017832605
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1017832604}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.19, y: 0.995, z: 1.457}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1533133720}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1024585327
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -24732,6 +24814,36 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.1766212, y: 1.4444053, z: 1.9551525}
   m_Center: {x: 0, y: 0.72169673, z: 0.0000014603138}
+--- !u!1 &1268772313
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1268772314}
+  m_Layer: 0
+  m_Name: attackArea
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1268772314
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1268772313}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.19, y: 0.995, z: 1.457}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4775669315380564977}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1274223262
 GameObject:
   m_ObjectHideFlags: 0
@@ -26157,9 +26269,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1359969682}
+  - component: {fileID: 1359969683}
   m_Layer: 0
   m_Name: Axe
-  m_TagString: Untagged
+  m_TagString: Axe
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -26178,6 +26291,19 @@ Transform:
   m_Father: {fileID: 624277127}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &1359969683
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1359969681}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 4.743715, y: 109.329765, z: 51.361378}
+  m_Center: {x: 1.8986024, y: 42.93773, z: 45.094017}
 --- !u!1 &1367235530
 GameObject:
   m_ObjectHideFlags: 0
@@ -26270,9 +26396,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1375854797}
+  - component: {fileID: 1375854798}
   m_Layer: 0
   m_Name: Axe
-  m_TagString: Untagged
+  m_TagString: Axe
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -26291,6 +26418,19 @@ Transform:
   m_Father: {fileID: 42435419}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &1375854798
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1375854796}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 4.743715, y: 109.329765, z: 51.361378}
+  m_Center: {x: 1.8986024, y: 42.93773, z: 45.094017}
 --- !u!1001 &1376139347
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -30856,6 +30996,7 @@ Transform:
   - {fileID: 1130936545}
   - {fileID: 624277127}
   - {fileID: 1248544843}
+  - {fileID: 1017832605}
   m_Father: {fileID: 1322368058}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -30902,6 +31043,9 @@ MonoBehaviour:
   targetMask:
     serializedVersion: 2
     m_Bits: 8
+  attackArea: {fileID: 1017832605}
+  attackRadius: 2
+  attackDelay: 1
   EnemyWayPoint:
   - {fileID: 488652694}
   - {fileID: 1275612862}
@@ -38431,6 +38575,36 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &2059733775
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2059733776}
+  m_Layer: 0
+  m_Name: attackArea
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2059733776
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2059733775}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.19, y: 0.995, z: 1.457}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 52528318}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2064698817
 GameObject:
   m_ObjectHideFlags: 0
@@ -39067,6 +39241,9 @@ MonoBehaviour:
   targetMask:
     serializedVersion: 2
     m_Bits: 8
+  attackArea: {fileID: 1268772314}
+  attackRadius: 2
+  attackDelay: 1
   EnemyWayPoint:
   - {fileID: 1941460139}
   - {fileID: 1383538838}
@@ -39121,6 +39298,7 @@ Transform:
   - {fileID: 4775669316885191563}
   - {fileID: 4775669317105208342}
   - {fileID: 1217576168}
+  - {fileID: 1268772314}
   m_Father: {fileID: 1102768952}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -39285,13 +39463,27 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4775669315966705705}
+  - component: {fileID: 4775669315966705703}
   m_Layer: 0
   m_Name: Axe
-  m_TagString: Untagged
+  m_TagString: Axe
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!65 &4775669315966705703
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4775669315966705702}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 4.743715, y: 109.329765, z: 51.361378}
+  m_Center: {x: 1.8986024, y: 42.93773, z: 45.094017}
 --- !u!4 &4775669315966705705
 Transform:
   m_ObjectHideFlags: 0

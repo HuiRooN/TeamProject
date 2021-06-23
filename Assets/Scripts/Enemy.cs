@@ -6,7 +6,7 @@ using UnityEngine.AI;
 
 public class Enemy : MonoBehaviour
 {
-    private enum State { patrol, trace}
+    private enum State { patrol, trace, attack}
     private State state;
 
 	private bool isStop = false;
@@ -24,7 +24,13 @@ public class Enemy : MonoBehaviour
 	[SerializeField] Transform eyeTransform;
     [SerializeField] LayerMask targetMask;
 
-    private NavMeshAgent agent;
+
+	[SerializeField] Transform attackArea;
+	[SerializeField] float attackRadius = 4.0f;
+	[SerializeField] float attackDelay = 1.0f;
+	private float attackDistanceMax;
+
+	private NavMeshAgent agent;
 	[SerializeField] Transform[] EnemyWayPoint;
 	private int wayCount = 0;
 
@@ -51,7 +57,10 @@ public class Enemy : MonoBehaviour
 		InvokeRepeating("PatrolMove", 0f, 2f);
 
 		animator = GetComponent<Animator>();
-    }
+
+		attackDistanceMax = Vector3.Distance(transform.position, new Vector3(attackArea.position.x, transform.position.y, attackArea.position.z)) + attackRadius;
+		attackDistanceMax += agent.radius;
+	}
 
     // Update is called once per frame
     void Update()
@@ -96,6 +105,11 @@ public class Enemy : MonoBehaviour
 				agent.SetDestination(playerTransform.position);
 				stayTime = 0f;
 				break;
+
+			case State.attack:
+				DoAttack();
+				stayTime = 0f;
+				break;
 		}
 	}
 
@@ -126,7 +140,17 @@ public class Enemy : MonoBehaviour
 				{
 					if (state == State.patrol) CancelInvoke();
 
-
+					if (Vector3.Distance(playerTransform.position, transform.position) <= attackDistanceMax)
+					{
+						if (state == State.attack) return;
+						animator.SetBool("Attack", true);
+						state = State.attack;
+						agent.isStopped = true;
+						patroling = false;
+						return;
+					}
+					if (state == State.attack)
+						animator.SetBool("Attack", false);
 					state = State.trace;
 					agent.isStopped = false;
 					patroling = false;
@@ -141,6 +165,18 @@ public class Enemy : MonoBehaviour
 		if (state == State.trace)
 		{
 			animator.SetBool("FindTarget", true);
+			savePosition = playerTransform.position;
+			agent.SetDestination(savePosition);
+			state = State.patrol;
+		}
+
+		if (state == State.attack)
+		{
+			animator.SetBool("Attack", false);
+			animator.SetBool("FindTarget", true);
+			wasTracing = true;
+			agent.isStopped = false;
+
 			savePosition = playerTransform.position;
 			agent.SetDestination(savePosition);
 			state = State.patrol;
@@ -167,8 +203,31 @@ public class Enemy : MonoBehaviour
 				wayCount = 0;
 		}
 	}
+	private void DoAttack()
+	{
+		agent.isStopped = true;
+		var lookRotation = Quaternion.LookRotation(playerTransform.transform.position - transform.position);
+		var targetAngleY = lookRotation.eulerAngles.y;
 
-	private void StopControl()
+		float turnVelocity = 0.5f;
+		float turnTime = 0.1f;
+		transform.eulerAngles = Vector3.up * Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngleY, ref turnVelocity, turnTime);
+
+		if (attackDelay <= 0f)
+		{
+			animator.SetBool("AttackBigin", true);
+			Invoke("Shoot", 0.15f);
+			attackDelay = 1f;
+		}
+		else
+		{
+			attackDelay -= Time.deltaTime;
+			if (animator.GetBool("AttackBigin"))
+				animator.SetBool("AttackBigin", false);
+		}
+
+	}
+		private void StopControl()
 	{
 		if (isStop == false) return;
 		if (stopTime <= 0f)
