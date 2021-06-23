@@ -321,6 +321,7 @@
 -r:"Library/Bee/artifacts/1900b0aE.dag/UnityEngine.UI.ref.dll"
 -r:"Library/Bee/artifacts/1900b0aE.dag/VSSettingsProvider.ref.dll"
 "Assets/Scripts/CameraFollow.cs"
+"Assets/Scripts/Enemy.cs"
 "Assets/Scripts/ItemSpawn.cs"
 "Assets/Scripts/MinimapCamera.cs"
 "Assets/Scripts/Player.cs"

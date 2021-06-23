@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+	Rigidbody rigidbody;
+
 	public float speed;
 
 	float hAxis;
@@ -24,6 +26,7 @@ public class Player : MonoBehaviour
 	// Start is called before the first frame update
 	void Awake()
     {
+		rigidbody = GetComponent<Rigidbody>();
 		anim = GetComponent<Animator>();
 		health = maxHealth;
 		coin = 0;
@@ -99,10 +102,28 @@ public class Player : MonoBehaviour
 				coin += 1;
 		}
 
-		if(collision.gameObject.tag == "Enemy")
-        {
-			Debug.Log("IN");
-			health -= 1;
-        }
+		if (collision.gameObject.tag == "Enemy")
+		{
+			anim.SetBool("isDamage", true);
+			if (health == 0)
+				return;
+			else
+				health -= 1;
+
+			Vector3 reverseVec = -transform.position;
+			StartCoroutine(OnDamage(reverseVec));
+		}
+		else
+			anim.SetBool("isDamage", false);
 	}
+
+	IEnumerator OnDamage(Vector3 reverseVec)
+    {
+		yield return new WaitForSeconds(0.2f);
+
+		reverseVec = reverseVec.normalized;
+		reverseVec += Vector3.up;
+
+		rigidbody.AddForce(reverseVec * 2.5f, ForceMode.Impulse);
+    }
 }
