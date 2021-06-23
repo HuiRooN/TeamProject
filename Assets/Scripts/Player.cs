@@ -98,5 +98,11 @@ public class Player : MonoBehaviour
 			else
 				coin += 1;
 		}
+
+		if(collision.gameObject.tag == "Enemy")
+        {
+			Debug.Log("IN");
+			health -= 1;
+        }
 	}
 }

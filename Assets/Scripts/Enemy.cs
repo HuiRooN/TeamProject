@@ -3,13 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-#if UNITY_EDITOR
-using UnityEditor;
-#endif
 
 public class Enemy : MonoBehaviour
 {
-    private enum State { patrol, trace, attack}
+    private enum State { patrol, trace}
     private State state;
 
 	private bool isStop = false;
@@ -26,11 +23,6 @@ public class Enemy : MonoBehaviour
 
 	[SerializeField] Transform eyeTransform;
     [SerializeField] LayerMask targetMask;
-
-    [SerializeField] Transform attackArea;
-    [SerializeField] float attackRadius;
-    private float attackDelay;
-    private float attackDistanceMax;
 
     private NavMeshAgent agent;
 	[SerializeField] Transform[] EnemyWayPoint;
@@ -55,15 +47,10 @@ public class Enemy : MonoBehaviour
 		walkSpeed = 5.0f;
         runSpeed = 8.0f;
 
-        attackDelay = 1f;
-
         agent = GetComponent<NavMeshAgent>();
 		InvokeRepeating("PatrolMove", 0f, 2f);
 
 		animator = GetComponent<Animator>();
-
-        attackDistanceMax = Vector3.Distance(transform.position, new Vector3(attackArea.position.x, transform.position.y, attackArea.position.z)) + attackRadius;
-        attackDistanceMax += agent.radius;
     }
 
     // Update is called once per frame
@@ -109,10 +96,6 @@ public class Enemy : MonoBehaviour
 				agent.SetDestination(playerTransform.position);
 				stayTime = 0f;
 				break;
-			case State.attack:
-				DoAttack();
-				stayTime = 0f;
-				break;
 		}
 	}
 
@@ -143,17 +126,6 @@ public class Enemy : MonoBehaviour
 				{
 					if (state == State.patrol) CancelInvoke();
 
-					
-
-					if (Vector3.Distance(playerTransform.position, transform.position) <= attackDistanceMax)
-					{
-						if (state == State.attack) return;
-						state = State.attack;
-						//runSpeed = 0f;
-						agent.isStopped = true;
-						patroling = false;
-						return;
-					}
 
 					state = State.trace;
 					agent.isStopped = false;
@@ -173,16 +145,7 @@ public class Enemy : MonoBehaviour
 			agent.SetDestination(savePosition);
 			state = State.patrol;
 		}
-		if (state == State.attack)
-		{
-			animator.SetBool("FindTarget", true);
-			wasTracing = true;
-			agent.isStopped = false;
 
-			savePosition = playerTransform.position;
-			agent.SetDestination(savePosition);
-			state = State.patrol;
-		}
 	}
 
 	private void PatrolMove()
@@ -222,44 +185,5 @@ public class Enemy : MonoBehaviour
 		}
 	}
 
-	private void DoAttack()
-	{
-		agent.isStopped = true;
-		var lookRotation = Quaternion.LookRotation(playerTransform.transform.position - transform.position);
-		var targetAngleY = lookRotation.eulerAngles.y;
 
-		float turnVelocity = 0.5f;
-		float turnTime = 0.1f;
-		transform.eulerAngles = Vector3.up * Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngleY, ref turnVelocity, turnTime);
-
-		if (attackDelay <= 0f)
-		{
-			animator.SetBool("AttackBigin", true);
-			Invoke("Shoot", 0.15f);
-			attackDelay = 2f;
-		}
-		else
-		{
-			attackDelay -= Time.deltaTime;
-			if (animator.GetBool("AttackBigin"))
-				animator.SetBool("AttackBigin", false);
-		}
-	}
-
-#if UNITY_EDITOR
-	private void OnDrawGizmosSelected()
-	{
-		var leftRayRotation = Quaternion.AngleAxis(-viewAngle * 0.5f, Vector3.up);
-		var leftRayDirection = leftRayRotation * transform.forward;
-
-		Handles.color = new Color(1f, 1f, 1f, 0.2f);
-		Handles.DrawSolidArc(transform.position, Vector3.up, leftRayDirection, viewAngle, viewDistance);
-
-		if (attackArea != null)
-		{
-			Gizmos.color = new Color(1f, 0f, 0f, 0.5f);
-			Gizmos.DrawSphere(attackArea.position, attackRadius);
-		}
-	}
-#endif
 }
