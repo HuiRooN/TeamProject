@@ -1,10 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
 	Rigidbody rigidbody;
+
+	public GameObject SuccessPanel;
+	public GameObject FailPanel;
 
 	public float speed;
 
@@ -26,17 +30,21 @@ public class Player : MonoBehaviour
 	// Start is called before the first frame update
 	void Awake()
     {
+		Time.timeScale = 1;
 		rigidbody = GetComponent<Rigidbody>();
 		anim = GetComponent<Animator>();
 		health = maxHealth;
 		coin = 0;
-    }
+		SuccessPanel.SetActive(false);
+		FailPanel.SetActive(false);
+	}
 
     // Update is called once per frame
     void Update()
 	{
 		//GetInput();
 		Move();
+		GameEnd();
 		//moveVec = new Vector3(hAxis, 0, vAxis).normalized;
 
 		//if(rDown)
@@ -121,6 +129,15 @@ public class Player : MonoBehaviour
 		}
 		else
 			anim.SetBool("isDamage", false);
+
+		if(collision.gameObject.tag == "Door")
+        {
+			if(coin == maxCoin)
+            {
+				Time.timeScale = 0;
+				SuccessPanel.SetActive(true);
+			}
+		}
 	}
 
     private void OnTriggerEnter(Collider other)
@@ -145,5 +162,14 @@ public class Player : MonoBehaviour
 		reverseVec += Vector3.up;
 
 		rigidbody.AddForce(reverseVec * 2.5f, ForceMode.Impulse);
+    }
+
+	public void GameEnd()
+    {
+		if(health == 0)
+        {
+			Time.timeScale = 0;
+			FailPanel.SetActive(true);
+		}
     }
 }

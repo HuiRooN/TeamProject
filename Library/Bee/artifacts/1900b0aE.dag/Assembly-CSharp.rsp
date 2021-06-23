@@ -323,6 +323,7 @@
 "Assets/Scripts/CameraFollow.cs"
 "Assets/Scripts/Enemy.cs"
 "Assets/Scripts/ItemSpawn.cs"
+"Assets/Scripts/MainUIManager.cs"
 "Assets/Scripts/MinimapCamera.cs"
 "Assets/Scripts/Player.cs"
 "Assets/Scripts/UiManager.cs"
