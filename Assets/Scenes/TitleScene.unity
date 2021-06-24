@@ -1220,7 +1220,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: "\uC774\uB3D9 : w / a / a / s / d\n\uC2DC\uC57C \uD68C\uC804 : \uB9C8\uC6B0\uC2A4
+  m_Text: "\uC774\uB3D9 : w / a / s / d\n\uC2DC\uC57C \uD68C\uC804 : \uB9C8\uC6B0\uC2A4
     \uD68C\uC804"
 --- !u!222 &817526992
 CanvasRenderer:

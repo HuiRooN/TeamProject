@@ -26,6 +26,12 @@ public class Player : MonoBehaviour
 
 	Animator anim;
 	[SerializeField] Transform cameraTransform;
+	[SerializeField] BGM bgm;
+
+	[SerializeField] AudioClip[] audioClips;
+	AudioSource audioSource;
+
+	bool end;
 
 	// Start is called before the first frame update
 	void Awake()
@@ -37,32 +43,30 @@ public class Player : MonoBehaviour
 		coin = 0;
 		SuccessPanel.SetActive(false);
 		FailPanel.SetActive(false);
+
+		end = false;
+
+		audioSource = GetComponent<AudioSource>();
+
 	}
 
     // Update is called once per frame
     void Update()
 	{
 		//GetInput();
-		Move();
-		GameEnd();
-		//moveVec = new Vector3(hAxis, 0, vAxis).normalized;
+		if (!end)
+		{
+			Move();
+			GameEnd();
+			Cursor.visible = false;
+		}
+		else
+			Cursor.visible = true;
 
-		//if(rDown)
-  //      {
-		//	transform.position += moveVec * speed * 1.5f * Time.deltaTime;
-		//}
-  //      else
-  //      {
-		//	transform.position += moveVec * speed * Time.deltaTime;
-		//}
-
-		//anim.SetBool("isWalk", moveVec != Vector3.zero);
-		//anim.SetBool("isRun", rDown);
-
-		//transform.LookAt(transform.position + moveVec);
-	}
-	void GetInput()
-	{
+		if(Input.GetKeyDown(KeyCode.Q))
+        {
+			coin = 10;
+        }
 	}
 
 	void Move()
@@ -113,22 +117,14 @@ public class Player : MonoBehaviour
 			if (coin == maxCoin)
 				return;
 			else
+			{
 				coin += 1;
-		}
 
-		if (collision.gameObject.tag == "Enemy")
-		{
-			anim.SetBool("isDamage", true);
-			if (health == 0)
-				return;
-			else
-				health -= 1;
-
-			Vector3 reverseVec = -transform.position;
-			StartCoroutine(OnDamage(reverseVec));
+				audioSource.clip = audioClips[1];
+				audioSource.Play();
+				audioSource.loop = false;
+			}
 		}
-		else
-			anim.SetBool("isDamage", false);
 
 		if(collision.gameObject.tag == "Door")
         {
@@ -136,6 +132,7 @@ public class Player : MonoBehaviour
             {
 				Time.timeScale = 0;
 				SuccessPanel.SetActive(true);
+				bgm.Victory();
 			}
 		}
 	}
@@ -146,6 +143,11 @@ public class Player : MonoBehaviour
 		{
 			if (health == 0)
 				return;
+
+			audioSource.clip = audioClips[0];
+			audioSource.Play();
+			audioSource.loop = false;
+
 			health -= 1;
 			Vector3 reverseVec = -transform.position;
 			StartCoroutine(OnDamage(reverseVec));
@@ -170,6 +172,13 @@ public class Player : MonoBehaviour
         {
 			Time.timeScale = 0;
 			FailPanel.SetActive(true);
+			end = true;
+			bgm.Defeat();
 		}
+    }
+
+	public bool GetEnd()
+    {
+		return end;
     }
 }

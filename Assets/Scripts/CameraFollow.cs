@@ -19,6 +19,7 @@ public class CameraFollow : MonoBehaviour
     private float x;
     private float y;
 
+    [SerializeField] Player player;
 
     // Start is called before the first frame update
     void Start()
@@ -36,6 +37,9 @@ public class CameraFollow : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
+        if (player.GetEnd())
+            return;
+
         if(target)
         {
             if(dist >=5f)
